@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit PokemonsCaptures{% endblock %}
+
+{% block body %}
+    <h1>Edit PokemonsCaptures</h1>
+
+    {{ include('pokemons_captures/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('pokemons_captures_index') }}">back to list</a>
+
+    {{ include('pokemons_captures/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PokemonRef index{% endblock %}
+
+{% block body %}
+<style type="text/css">
+    .wrapper {font-family: Calibri}
+</style>
+<section class='wrapper'>
+    <h1>📝 Liste des pokémons</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>PokemonId</th>
+                <th>Nom</th>
+                <th>CourbeXP</th>
+                <th>Evolution</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pokemon_ref in pokemon_refs %}
+            <tr>
+                <td>{{ pokemon_ref.id }}</td>
+                <td>{{ pokemon_ref.pokemonId }}</td>
+                <td>{{ pokemon_ref.nom }}</td>
+                <td>{{ pokemon_ref.courbeXP }}</td>
+                <td>{{ pokemon_ref.evolution ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('pokemon_ref_show', {'id': pokemon_ref.id}) }}">show</a>
+                    <a href="{{ path('pokemon_ref_edit', {'id': pokemon_ref.id}) }}">edit</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('pokemon_ref_new') }}">Create new</a>
+</section>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PokemonsCaptures index{% endblock %}
+
+{% block body %}
+    <h1>PokemonsCaptures index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Sexe</th>
+                <th>Niveau</th>
+                <th>Xp</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pokemons_capture in pokemons_captures %}
+            <tr>
+                <td>{{ pokemons_capture.id }}</td>
+                <td>{{ pokemons_capture.sexe }}</td>
+                <td>{{ pokemons_capture.niveau }}</td>
+                <td>{{ pokemons_capture.xp }}</td>
+                <td>
+                    <a href="{{ path('pokemons_captures_show', {'id': pokemons_capture.id}) }}">show</a>
+                    <a href="{{ path('pokemons_captures_edit', {'id': pokemons_capture.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('pokemons_captures_new') }}">Create new</a>
+{% endblock %}

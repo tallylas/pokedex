@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit LieuCapture{% endblock %}
+
+{% block body %}
+    <h1>Edit LieuCapture</h1>
+
+    {{ include('lieu_capture/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('lieu_capture_index') }}">back to list</a>
+
+    {{ include('lieu_capture/_delete_form.html.twig') }}
+{% endblock %}

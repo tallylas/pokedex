@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Chasse{% endblock %}
+
+{% block body %}
+    <h1>Create new Chasse</h1>
+
+    {{ include('chasse/_form.html.twig') }}
+
+    <a href="{{ path('chasse_index') }}">back to list</a>
+{% endblock %}

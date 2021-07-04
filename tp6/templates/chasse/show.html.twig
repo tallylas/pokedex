@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chasse{% endblock %}
+
+{% block body %}
+    <h1>Chasse</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ chasse.id }}</td>
+            </tr>
+            <tr>
+                <th>HeureEntrainement</th>
+                <td>{{ chasse.heureEntrainement ? chasse.heureEntrainement|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('chasse_index') }}">back to list</a>
+
+    <a href="{{ path('chasse_edit', {'id': chasse.id}) }}">edit</a>
+
+    {{ include('chasse/_delete_form.html.twig') }}
+{% endblock %}

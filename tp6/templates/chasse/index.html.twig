@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chasse index{% endblock %}
+
+{% block body %}
+    <h1>Chasse index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>HeureEntrainement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for chasse in chasses %}
+            <tr>
+                <td>{{ chasse.id }}</td>
+                <td>{{ chasse.heureEntrainement ? chasse.heureEntrainement|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('chasse_show', {'id': chasse.id}) }}">show</a>
+                    <a href="{{ path('chasse_edit', {'id': chasse.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('chasse_new') }}">Create new</a>
+{% endblock %}

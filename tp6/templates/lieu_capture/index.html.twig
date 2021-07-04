@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LieuCapture index{% endblock %}
+
+{% block body %}
+    <h1>LieuCapture index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lieu_capture in lieu_captures %}
+            <tr>
+                <td>{{ lieu_capture.id }}</td>
+                <td>{{ lieu_capture.name }}</td>
+                <td>
+                    <a href="{{ path('lieu_capture_show', {'id': lieu_capture.id}) }}">show</a>
+                    <a href="{{ path('lieu_capture_edit', {'id': lieu_capture.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('lieu_capture_new') }}">Create new</a>
+{% endblock %}

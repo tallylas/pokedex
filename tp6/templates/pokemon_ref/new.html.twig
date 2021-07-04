@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New PokemonRef{% endblock %}
+
+{% block body %}
+    <h1>Create new PokemonRef</h1>
+
+    {{ include('pokemon_ref/_form.html.twig') }}
+
+    <a href="{{ path('pokemon_ref_index') }}">back to list</a>
+{% endblock %}
