@@ -1,18 +1,26 @@
 security:
     # https://symfony.com/doc/current/security/experimental_authenticators.html
     enable_authenticator_manager: true
+    password_hashers:
+        App\Entity\Dresseur:
+            algorithm: auto
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\Dresseur
+                property: email
         users_in_memory: { memory: null }
-    encoders:
-        App\Entity\Dresseur: sha512
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider #provider: users_in_memory
             custom_authenticator: App\Security\ConnexionAuthenticator
             logout:
                 path: app_logout

@@ -8,12 +8,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface; //update
 
 /**
  * @ORM\Entity(repositoryClass=DresseurRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class Dresseur implements UserInterface
+class Dresseur implements UserInterface, PasswordAuthenticatedUserInterface //update
 {
     /**
      * @ORM\Id
@@ -42,13 +43,16 @@ class Dresseur implements UserInterface
      */
     private $coins;
 
-    private $role = [];
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = []; //update
 
-    public function __construct()
+    /*public function __construct()
     {
         $this->pokemon_id = new ArrayCollection();
         array_push($this->role, "Dresseur");
-    }
+    }*/
 
     public function getId(): ?int
     {
@@ -141,7 +145,7 @@ class Dresseur implements UserInterface
 
     public function getRoles():array
     {
-        return $this->$role;
+        return $this->roles; //update
     }
 
     public function getSalt():?string
@@ -159,6 +163,29 @@ class Dresseur implements UserInterface
 
    }
 
+   public function __call($name, $arguments)
+    {
+        // TODO: Implement @method string getUserIdentifier()
+    }
 
+
+    //update
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
 
 }

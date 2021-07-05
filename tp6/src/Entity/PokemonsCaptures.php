@@ -46,6 +46,11 @@ class PokemonsCaptures
      */
     private $xp;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $horaireEntrainement;
+
     public function __construct()
     {
         $this->PokemonId = new ArrayCollection();
@@ -131,4 +136,17 @@ class PokemonsCaptures
 
         return $this;
     }
+
+    public function getHoraireEntrainement(): ?int
+    {
+        return $this->horaireEntrainement;
+    }
+
+    public function setHoraireEntrainement(int $horaireEntrainement): self
+    {
+        $this->horaireEntrainement = $horaireEntrainement;
+
+        return $this;
+    }
+
 }

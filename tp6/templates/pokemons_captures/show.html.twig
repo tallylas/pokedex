@@ -30,5 +30,6 @@
 
     <a href="{{ path('pokemons_captures_edit', {'id': pokemons_capture.id}) }}">edit</a>
 
+    {{ include('pokemons_captures/_entrainer_form.html.twig') }}
     {{ include('pokemons_captures/_delete_form.html.twig') }}
 {% endblock %}

@@ -15,6 +15,15 @@
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
+
+	Votre premier pokémon : 
+        <select id="choixPremierPokemon">
+		<option value="1">Bulbizarre</option>
+		<option value="3">Salamèche</option>
+		<option value="4">Carapuce</option>
+        </select><br>
+
+
         {{ form_row(registrationForm.agreeTerms) }}
 
         <button type="submit" class="btn">Register</button>
