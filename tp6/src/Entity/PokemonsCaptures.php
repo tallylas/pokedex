@@ -53,6 +53,7 @@ class PokemonsCaptures
 
     public function __construct()
     {
+        //$this->DresseurId = new ArrayCollection();
         $this->PokemonId = new ArrayCollection();
     }
 
@@ -121,7 +122,23 @@ class PokemonsCaptures
         return $this;
     }
 
-    public function addPokemonId(PokemonRef $pokemonId): self
+    /*public function addDresseurId(Dresseur $id): self
+    {
+        if (!$this->DresseurId->contains($id)) {
+            $this->DresseurId[] = $id;
+        }
+
+        return $this;
+    }
+
+    public function removeDresseurId(Dresseur $id): self
+    {
+        $this->DresseurId->removeElement($id);
+
+        return $this;
+    }*/
+
+    public function addPokemonId(PokemonRef $pokemonId): self //tester avec juste $id
     {
         if (!$this->PokemonId->contains($pokemonId)) {
             $this->PokemonId[] = $pokemonId;

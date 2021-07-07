@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\PokemonsCaptures;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use App\Controller\PokemonRef;
+use App\Entity\PokemonRef;
 
 class RegistrationController extends AbstractController
 {
@@ -39,17 +39,18 @@ class RegistrationController extends AbstractController
             $user->setCoins(5000);
             $user->setName($form->get('name')->getData());
             $user->setRoles(["ROLE_USER"]); //update
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
+            //Connexion automatique du nouvel utilisateur
             $token = new UsernamePasswordToken(
                 $user,
                 $password,
                 'main',
                 $user->getRoles()
             );
-
             $this->get('security.token_storage')->setToken($token);
             $this->get('session')->set('_security_main', serialize($token));
 
@@ -65,8 +66,16 @@ class RegistrationController extends AbstractController
             ->getQuery();
             $userCreated = implode($userCreated->setMaxResults(1)->getOneOrNullResult());*/
 
-            $newCapture->setDresseurId(40); //$this->getUser()->getId());
-            $newCapture->setPokemonId(2);
+            $dresseur = $this->getDoctrine()->getRepository(Dresseur::class)->find(40);
+            $newCapture->setDresseurId($dresseur->getId());
+
+            //$newCapture->setDresseurId($this->getUser()->getId());
+
+            //$pokemon = $this->getDoctrine()->getRepository(PokemonRef::class)->find(2);
+
+            //$newCapture->addPokemonId($pokemon);
+            //echo $newCapture->getPokemonId()->toString();
+            //$newCapture->setPokemonId($pokemon->getPokemonId());
 
             /*$qb = $entityManager->createQueryBuilder();
             $pok = $qb -> select('id')
@@ -90,7 +99,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($newCapture);
             $entityManager->flush();
 
-            return $this->redirectToRoute('main');
+            //return $this->redirectToRoute('main');
         }
 
         return $this->render('registration/register.html.twig', [
